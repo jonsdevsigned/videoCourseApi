@@ -4,6 +4,7 @@ const Users = require('../models/users.models')
 const Videos = require('../models/videos.models')
 const db = require('../utils/database')
 const initModels = require('../models/initModels')
+const UsersCourses = require('../models/usersCourses.models')
 
 initModels()
 
@@ -78,6 +79,14 @@ const videos = [
 	}
 ]
 
+const userscourses = [
+	{ userId: 2, courseId: 1 },
+	{ userId: 2, courseId: 3 },
+	{ userId: 1, courseId: 3 },
+	{ userId: 3, courseId: 2 },
+	{ userId: 3, courseId: 3 }
+]
+
 db.sync({ force: true })
 	.then(() => {
 		console.log('starting seeders')
@@ -93,4 +102,7 @@ db.sync({ force: true })
 	})
 	.then(() => {
 		videos.forEach((video) => Videos.create(video))
+	})
+	.then(() => {
+		userscourses.forEach((userCourse) => UsersCourses.create(userCourse))
 	})
